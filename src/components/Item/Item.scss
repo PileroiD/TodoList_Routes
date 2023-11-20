@@ -1,0 +1,14 @@
+.task-item {
+    background-color: #232222;
+    font-size: 18px;
+    line-height: 44px;
+    color: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    padding-left: 30px;
+    transition: all 0.2s;
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
