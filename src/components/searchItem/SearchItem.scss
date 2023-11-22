@@ -1,0 +1,42 @@
+.searchItem {
+    display: flex;
+    align-items: center;
+    position: relative;
+    &-input {
+        padding: 7px;
+        width: 300px;
+    }
+    &-button {
+        background-color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            transform: translateY(-4px);
+        }
+        img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+    &-showAll {
+        padding: 0;
+        line-height: 10px;
+        position: absolute;
+        top: 50px;
+        &-button {
+            color: green;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px 5px 10px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

@@ -1,14 +1,43 @@
 .task-item {
-    background-color: #232222;
-    font-size: 18px;
+    background-color: #3d5a80;
     line-height: 44px;
     color: #fff;
     margin-bottom: 10px;
     border-radius: 10px;
     padding-left: 30px;
-    transition: all 0.2s;
-    cursor: pointer;
-    &:hover {
-        transform: translateY(-5px);
+    width: 100%;
+    position: relative;
+    &:focus {
+        border: none;
+    }
+    &-img {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 7px;
+        transition: all 0.2s;
+        &:nth-child(2) {
+            right: 55px;
+        }
+        &:hover {
+            // transform: translateY(3px);
+            top: 42%;
+        }
+    }
+    &-input {
+        background-color: #3d5a80;
+        font-size: 18px;
+        border: none;
+        color: #fff;
+        height: 30px;
+        padding-left: 10px;
+        width: 40%;
+        &:focus {
+            background-color: #fff;
+            color: black;
+            border: none;
+        }
     }
 }

@@ -1,0 +1,16 @@
+.sortTasks {
+    &-button {
+        width: 200px;
+        height: 34px;
+        background-color: #232222;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            transform: translateY(-4px);
+        }
+    }
+}

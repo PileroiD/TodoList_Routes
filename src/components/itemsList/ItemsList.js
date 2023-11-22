@@ -2,12 +2,20 @@ import Item from "../Item/Item";
 
 import "./ItemsList.scss";
 
-const ItemsList = ({ tasks }) => {
+const ItemsList = ({ tasks, updateTask, deleteTask }) => {
     const tasksList = tasks.map((task) => {
-        return <Item {...task} />;
+        return (
+            <Item
+                key={task.id}
+                taskId={task.id}
+                taskInfo={task}
+                updateTask={updateTask}
+                deleteTask={deleteTask}
+            />
+        );
     });
 
-    return <ul className="task-wrapper">{tasksList}</ul>;
+    return <div className="task-wrapper">{tasksList}</div>;
 };
 
 export default ItemsList;
