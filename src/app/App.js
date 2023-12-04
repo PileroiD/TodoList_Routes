@@ -1,5 +1,6 @@
-import ItemsList from "../itemsList/ItemsList";
-import Actions from "../actions/Actions";
+import ItemsList from "../components/itemsList/ItemsList";
+import Actions from "../components/actions/Actions";
+import TodoListService from "../services/TodoListService";
 
 import { useState, useEffect } from "react";
 import "./App.scss";
@@ -12,11 +13,13 @@ function App() {
 
     const updateTasks = () => setUpdateTasksFlag(!updateTasksFlag);
 
+    const todoListService = new TodoListService();
+
     useEffect(() => {
         setIsLoading(true);
 
-        fetch("http://localhost:3000/tasks")
-            .then((data) => data.json())
+        todoListService
+            .getAllTasks()
             .then((data) => setTasks(data))
             .finally(() => setIsLoading(false));
     }, [updateTasksFlag]);
@@ -24,13 +27,7 @@ function App() {
     const addTask = (text) => {
         setIsLoading(true);
 
-        fetch("http://localhost:3000/tasks", {
-            method: "POST",
-            headers: { "Content-Type": "application/json;charset=utf-8" },
-            body: JSON.stringify({
-                text,
-            }),
-        }).finally(() => {
+        todoListService.addTask(text).finally(() => {
             setIsLoading(false);
             updateTasks();
         });
@@ -39,19 +36,11 @@ function App() {
     const updateTask = (newtext, taskId) => {
         setIsLoading(true);
 
-        fetch(`http://localhost:3000/tasks/${taskId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json;charset=utf-8" },
-            body: JSON.stringify({
-                text: newtext,
-            }),
-        })
-            .then((data) => data.json())
-            .finally(() => {
-                setIsLoading(false);
-                updateTasks();
-                setWasSearched(false);
-            });
+        todoListService.updateTask(newtext, taskId).finally(() => {
+            setIsLoading(false);
+            updateTasks();
+            setWasSearched(false);
+        });
     };
 
     const searchTask = (searchingText) => {
@@ -73,15 +62,11 @@ function App() {
     const deleteTask = (taskId) => {
         setIsLoading(true);
 
-        fetch(`http://localhost:3000/tasks/${taskId}`, {
-            method: "DELETE",
-        })
-            .then((data) => data.json())
-            .finally(() => {
-                setIsLoading(false);
-                updateTask();
-                setWasSearched(false);
-            });
+        todoListService.deleteTask(taskId).finally(() => {
+            setIsLoading(false);
+            updateTasks();
+            setWasSearched(false);
+        });
     };
 
     const showAllTasks = () => {
