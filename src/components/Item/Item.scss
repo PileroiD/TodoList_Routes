@@ -1,4 +1,6 @@
 .task-item {
+    display: block;
+    text-decoration: none;
     background-color: #3d5a80;
     line-height: 44px;
     color: #fff;
@@ -7,6 +9,11 @@
     padding-left: 30px;
     width: 100%;
     position: relative;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+        transform: translateY(-3px);
+    }
     &:focus {
         border: none;
     }
@@ -33,7 +40,7 @@
         color: #fff;
         height: 30px;
         padding-left: 10px;
-        width: 40%;
+        width: 90%;
         &:focus {
             background-color: #fff;
             color: black;

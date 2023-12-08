@@ -6,6 +6,11 @@ class TodoListService {
         return await res.json();
     };
 
+    getOneTask = async (taskId) => {
+        const res = await fetch(`${this._apiBase}/${taskId}`);
+        return await res.json();
+    };
+
     addTask = async (text) => {
         const res = await fetch(this._apiBase, {
             method: "POST",

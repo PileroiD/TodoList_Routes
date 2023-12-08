@@ -1,17 +1,20 @@
-import Item from "../Item/Item";
+import { Link } from "react-router-dom";
 
 import "./ItemsList.scss";
 
-const ItemsList = ({ tasks, updateTask, deleteTask }) => {
+const ItemsList = ({ tasks, setChosenTask }) => {
     const tasksList = tasks.map((task) => {
         return (
-            <Item
+            <Link
                 key={task.id}
-                taskId={task.id}
-                taskInfo={task}
-                updateTask={updateTask}
-                deleteTask={deleteTask}
-            />
+                to={`task/${task.id}`}
+                className="task-item"
+                onClick={() => {
+                    setChosenTask(task.id);
+                }}
+            >
+                {task.text}
+            </Link>
         );
     });
 
