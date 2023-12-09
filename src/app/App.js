@@ -2,27 +2,21 @@ import ItemsList from "../components/itemsList/ItemsList";
 import Actions from "../components/actions/Actions";
 import Item from "../components/Item/Item";
 import TodoListService from "../services/TodoListService";
+import TaskWasNOTFound from "../components/taskWasNOTFound/TaskWasNOTFound";
+import PageNotFound from "../components/pageNotFound/PageNotFound";
 
 import { useState, useEffect } from "react";
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.scss";
-
-const PageNotFound = () => {
-    return <h1>This page doesn't exist</h1>;
-};
 
 function App() {
     const [tasks, setTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [updateTasksFlag, setUpdateTasksFlag] = useState(false);
     const [wasSearched, setWasSearched] = useState(false);
-    const [chosenTask, setChosenTask] = useState(null);
 
     const updateTasks = () => setUpdateTasksFlag(!updateTasksFlag);
-
-    const params = useParams();
-    const navigate = useNavigate();
 
     const todoListService = new TodoListService();
 
@@ -34,22 +28,6 @@ function App() {
             .then((data) => setTasks(data))
             .finally(() => setIsLoading(false));
     }, [updateTasksFlag]);
-
-    useEffect(() => {
-        console.log(params);
-    }, [params]);
-
-    useEffect(() => {
-        const handlePopstate = () => {
-            setChosenTask(null);
-        };
-
-        window.addEventListener("popstate", handlePopstate);
-
-        return () => {
-            window.removeEventListener("popstate", handlePopstate);
-        };
-    }, []);
 
     const addTask = (text) => {
         setIsLoading(true);
@@ -123,40 +101,39 @@ function App() {
         <div className="app">
             <div className="container">
                 <Routes>
-                    {chosenTask ? (
-                        <Route
-                            path="task/:id"
-                            element={
-                                <Item
-                                    deleteTask={deleteTask}
-                                    updateTask={updateTask}
-                                    setChosenTask={setChosenTask}
-                                />
-                            }
-                        />
-                    ) : (
-                        <Route
-                            path="/"
-                            element={
-                                <AppLayout
-                                    addTask={addTask}
-                                    searchTask={searchTask}
-                                    showAllTasks={showAllTasks}
-                                    sortTasks={sortTasks}
-                                    wasSearched={wasSearched}
-                                    setWasSearched={setWasSearched}
-                                    isLoading={isLoading}
-                                    tasks={tasks}
-                                    updateTask={updateTask}
-                                    deleteTask={deleteTask}
-                                    chosenTask={chosenTask}
-                                    setChosenTask={setChosenTask}
-                                    setIsLoading={setIsLoading}
-                                />
-                            }
-                        />
-                    )}
-                    <Route path="*" element={<PageNotFound />} />
+                    <Route
+                        path="/"
+                        element={
+                            <AppLayout
+                                addTask={addTask}
+                                searchTask={searchTask}
+                                showAllTasks={showAllTasks}
+                                sortTasks={sortTasks}
+                                wasSearched={wasSearched}
+                                setWasSearched={setWasSearched}
+                                isLoading={isLoading}
+                                tasks={tasks}
+                            />
+                        }
+                    />
+                    <Route
+                        path="task/:id"
+                        element={
+                            <Item
+                                deleteTask={deleteTask}
+                                updateTask={updateTask}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/taskIsNotFound"
+                        element={<TaskWasNOTFound />}
+                    ></Route>
+                    <Route path="/404" element={<PageNotFound />}></Route>
+                    <Route
+                        path="*"
+                        element={<Navigate to="/404" replace={true} />}
+                    />
                 </Routes>
             </div>
         </div>
@@ -173,12 +150,7 @@ const AppLayout = (props) => {
         setWasSearched,
         isLoading,
         tasks,
-        updateTask,
-        deleteTask,
-        chosenTask,
         setChosenTask,
-        setIsLoading,
-        setPrevChosenTask,
     } = props;
 
     return (

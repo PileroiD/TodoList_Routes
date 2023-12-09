@@ -1,5 +1,7 @@
 .task-item {
-    display: block;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     background-color: #3d5a80;
     line-height: 44px;
@@ -34,17 +36,38 @@
         }
     }
     &-input {
+        margin-top: 20px;
         background-color: #3d5a80;
         font-size: 18px;
         border: none;
         color: #fff;
-        height: 30px;
+        min-height: 30px;
         padding-left: 10px;
         width: 90%;
+        resize: vertical;
         &:focus {
             background-color: #fff;
             color: black;
             border: none;
         }
     }
+    &-submitBtn {
+        width: 80px;
+        height: 30px;
+        margin-left: 10px;
+        background-color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            transform: translateY(-5px);
+        }
+    }
+}
+
+.deletedMessage {
+    color: gray;
+    text-align: center;
+    font-size: 30px;
 }

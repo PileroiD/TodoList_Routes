@@ -45,3 +45,23 @@
     text-align: center;
     user-select: none;
 }
+
+.backButton {
+    width: 120px;
+    height: 30px;
+    background-color: green;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 100px;
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.backButton.center {
+    display: block;
+        margin: 0 auto;
+}

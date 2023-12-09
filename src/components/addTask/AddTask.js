@@ -6,7 +6,7 @@ const AddTask = (props) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        if (text && text.length < 60) {
+        if (text) {
             props.addTask(text);
         }
         setText("");
